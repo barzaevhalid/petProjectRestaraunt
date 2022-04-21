@@ -1,10 +1,11 @@
-import restaurants from "./sample-restaurants";
+import restaurants from "../sample-restaurants";
 import {useState} from "react";
-
-const Landing = () => {
+import {useNavigate} from   'react-router-dom'
+const Landing = (props) => {
     const [display, setDisplay] = useState(false)
     const [title, setTitle] = useState('')
     const [url, setUlr] = useState('')
+    const nav = useNavigate()
 
     const showList = () => {
         setDisplay(prev => !prev)
@@ -17,9 +18,8 @@ const Landing = () => {
         setTitle(title)
         setUlr(url)
     }
-
     const goToRestaurant = () => {
-        console.log(1)
+        nav(`/restaurant/${url}`)
     }
 
     return (
@@ -40,8 +40,11 @@ const Landing = () => {
                 <div className='restaurant_select_bottom'>
                     <ul>
                         {restaurants.map(item => {
+
                             return <li key={item.id}
-                            onClick={() => replaceTitle(item)}> {item.title}</li>
+                            onClick={() => replaceTitle(item)}>
+                                {item.title}
+                            </li>
                         })}
                     </ul>
                 </div>
